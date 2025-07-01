@@ -40,29 +40,16 @@ const BarcodeScanner = () => {
     toast.info('Scanner stopped.');
   };
 
-  const capture = useCallback(() => {
-    if (webcamRef.current) {
-      const imageSrc = webcamRef.current.getScreenshot();
-      if (imageSrc) {
-        processImage(imageSrc);
-      }
-    }
-  }, []);
-
   const processImage = async (imageSrc) => {
     try {
       setLoading(true);
-      
       // Convert base64 to blob for API call
-      const base64Data = imageSrc.split(',')[1];
-      
+      // const base64Data = imageSrc.split(',')[1]; // Removed unused variable
       // For demo purposes, we'll simulate barcode detection
       // In a real implementation, you would send the image to the backend
       // const response = await barcodeAPI.decodeBarcodeFromBase64({ image: base64Data });
-      
       // Simulate barcode detection (replace with actual API call)
       const mockBarcode = simulateBarcodeDetection();
-      
       if (mockBarcode && mockBarcode !== lastScannedCode) {
         setLastScannedCode(mockBarcode);
         await lookupItem(mockBarcode);
@@ -74,6 +61,15 @@ const BarcodeScanner = () => {
       setLoading(false);
     }
   };
+
+  const capture = useCallback(() => {
+    if (webcamRef.current) {
+      const imageSrc = webcamRef.current.getScreenshot();
+      if (imageSrc) {
+        processImage(imageSrc);
+      }
+    }
+  }, [processImage]);
 
   // Simulate barcode detection (replace with actual implementation)
   const simulateBarcodeDetection = () => {

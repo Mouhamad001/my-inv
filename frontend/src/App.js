@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,15 +17,15 @@ function App() {
       <div className="App">
         <Navbar bg="dark" variant="dark" expand="lg" className="mb-4">
           <Container>
-            <Navbar.Brand href="/">📦 Inventory Tracker</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/">📦 Inventory Tracker</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="/">Dashboard</Nav.Link>
-                <Nav.Link href="/inventory">Inventory</Nav.Link>
-                <Nav.Link href="/add">Add Item</Nav.Link>
-                <Nav.Link href="/scan">Scan Barcode</Nav.Link>
-                <Nav.Link href="/upload">Upload Image</Nav.Link>
+                <Nav.Link as={Link} to="/">Dashboard</Nav.Link>
+                <Nav.Link as={Link} to="/inventory">Inventory</Nav.Link>
+                <Nav.Link as={Link} to="/add">Add Item</Nav.Link>
+                <Nav.Link as={Link} to="/scan">Scan Barcode</Nav.Link>
+                <Nav.Link as={Link} to="/upload">Upload Image</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -57,4 +57,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
