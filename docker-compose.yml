@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # MySQL Database (Optional - for production use)
+  mysql:
+    image: mysql:8.0
+    container_name: inventory-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: inventory_db
+      MYSQL_USER: inventory_user
+      MYSQL_PASSWORD: inventory_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - inventory-network
+
+  # H2 Database (Alternative - for development)
+  h2:
+    image: oscarfonts/h2
+    container_name: inventory-h2
+    restart: unless-stopped
+    environment:
+      H2_OPTIONS: -ifNotExists
+    ports:
+      - "8082:81"
+    volumes:
+      - h2_data:/h2-data
+    networks:
+      - inventory-network
+
+volumes:
+  mysql_data:
+  h2_data:
+
+networks:
+  inventory-network:
+    driver: bridge 
